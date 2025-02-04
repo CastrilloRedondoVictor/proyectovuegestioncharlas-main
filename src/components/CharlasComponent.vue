@@ -35,11 +35,11 @@
         <div v-for="ronda in rondasFiltradas" :key="ronda.idRonda" 
         class="accordion-item">
           <h2 class="accordion-header" :id="`heading-${ronda.idRonda}`">
-            <!-- <div v-if="charlasPorRonda(ronda.idRonda).length > 0">
+            <div v-if="charlasPorRonda(ronda.idRonda).length > 0">
               <button class="btn custom-button" @click="abrirModalRonda(ronda.idRonda)">
                   Ver detalles Ronda
               </button>
-            </div>             -->
+            </div>            
             <button class="accordion-button collapsed d-flex justify-content-between align-items-center" type="button"
               data-bs-toggle="collapse" :data-bs-target="`#collapse-${ronda.idRonda}`" aria-expanded="false"
               :aria-controls="`collapse-${ronda.idRonda}`">
@@ -205,6 +205,20 @@
             <p><strong>Charlas:</strong> {{charlasAceptadas.length + charlasPropuestas.length}}</p>
             <p><strong>Aceptadas:</strong> {{charlasAceptadas.length}}</p>
             <p><strong>Propuestas :</strong> {{charlasPropuestas.length}}</p>
+            <div class="d-flex custom-buttons-container">
+              <button class="custom-button"
+                @click="mostrarNoVotados = !mostrarNoVotados;"
+                :class="{ 'active': mostrarNoVotados }">
+                <i class="fa-solid fa-cancel iconos"></i>
+                Usuarios sin votar
+              </button>
+            </div>
+
+            <hr v-if="mostrarNoVotados" />
+            <!-- Sección de Descripción -->
+            <div v-if="mostrarNoVotados" class="custom-background custom-descripcion">
+              <p>AQUÍ SALDRÁN LOS USUARIOS QUE NO HAN VOTADO AÚN</p>
+            </div>
             </div>
           </div>
         </div>
@@ -250,6 +264,7 @@ export default {
       mostrarModal: false,
       charlaSeleccionada: null,
       mostrarDescripcion: false,
+      mostrarNoVotados: false,
       mostrarRecursos: false,
       mostrarComentarios: false,
       votosCharlas: {}
@@ -326,6 +341,7 @@ export default {
     },
     cerrarModalRonda() {
       this.mostrarModalRonda = false;
+      this.mostrarNoVotados = false;
     },
     abrirModal(charla) {
       this.charlaSeleccionada = charla;
