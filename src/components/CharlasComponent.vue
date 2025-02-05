@@ -217,7 +217,9 @@
             <hr v-if="mostrarNoVotados" />
             <!-- Sección de Descripción -->
             <div v-if="mostrarNoVotados" class="custom-background custom-descripcion">
-              <p>AQUÍ SALDRÁN LOS USUARIOS QUE NO HAN VOTADO AÚN</p>
+              <div v-for="alumno in alumnosSinVotar" :key="alumno.idUsuario">
+                <p>{{ alumno.nombre }} {{ alumno.apellidos }}</p>
+              </div>
             </div>
             </div>
           </div>
@@ -267,7 +269,8 @@ export default {
       mostrarNoVotados: false,
       mostrarRecursos: false,
       mostrarComentarios: false,
-      votosCharlas: {}
+      votosCharlas: {},
+      alumnosSinVotar: {},
     };
   }, computed: {
     rondasFiltradas() {
@@ -329,6 +332,9 @@ export default {
       this.charlasAceptadas = 
         charlasFilter.filter((charla) => charla.idEstadoCharla === 2);        
     },
+    async alumnosNoVotaron(idRonda) {
+      this.alumnosSinVotar = await this.charlasService.getAlumnosSinVotoRonda(idRonda);
+    },
     async votosPorCharla(idCharla) {
 //      await this.votosPorRonda(idRonda)      
       var votos = 
@@ -338,6 +344,7 @@ export default {
     async abrirModalRonda(idRonda) {
       await this.votosPorRonda(idRonda)
       this.mostrarModalRonda = true;
+      await this.alumnosNoVotaron(idRonda);
     },
     cerrarModalRonda() {
       this.mostrarModalRonda = false;

@@ -42,6 +42,23 @@ export default class CharlasService {
         });
     }
 
+    getAlumnosSinVotoRonda(idRonda) {
+        return new Promise((resolve, reject) => {
+            const endpoint = `api/profesor/alumnossinvotoronda/${idRonda}`;
+            const token = Cookies.get('bearer_token');
+            axios.get(Global.urlBase + endpoint, {
+                headers: {
+                    Authorization: token,
+                },
+            })
+            .then(response => resolve(response.data))
+            .catch(error => {
+                console.error("Error al obtener los usuarios sin voto en la ronda:", error.response ? error.response.data : error);
+                reject(error);
+            });
+        });
+    }
+
     getVotosCharla(idCharla) {
         return new Promise((resolve, reject) => {
             const endpoint = `api/votos/votoscharla/${idCharla}`;
