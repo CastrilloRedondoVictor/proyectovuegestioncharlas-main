@@ -34,13 +34,11 @@
       <div class="accordion mt-4" id="accordionRondas">
         <div v-for="ronda in rondasFiltradas" :key="ronda.idRonda" 
         class="accordion-item">
-          <h2 class="accordion-header" :id="`heading-${ronda.idRonda}`">
-            <div v-if="charlasPorRonda(ronda.idRonda).length > 0">
-              <button class="btn custom-button" @click="abrirModalRonda(ronda.idRonda)">
-                  Ver detalles Ronda
-              </button>
-            </div>            
-            <button class="accordion-button collapsed d-flex justify-content-between align-items-center" type="button"
+          <h2 class="accordion-header d-flex justify-content-between align-items-center" :id="`heading-${ronda.idRonda}`">    
+            <div class="container-btn-abrirModalRonda">
+              <i class="fa-solid fa-circle-info btn-abrirModalRonda" @click="abrirModalRonda(ronda.idRonda)"></i>  
+            </div>
+            <button class="accordion-button collapsed" type="button"
               data-bs-toggle="collapse" :data-bs-target="`#collapse-${ronda.idRonda}`" aria-expanded="false"
               :aria-controls="`collapse-${ronda.idRonda}`">
               <span>{{ `Ronda ${ronda.idRonda} - ${ronda.descripcionModulo}` }}</span>
@@ -218,7 +216,7 @@
             <!-- Sección de Descripción -->
             <div v-if="mostrarNoVotados" class="custom-background custom-descripcion">
               <div v-for="alumno in alumnosSinVotar" :key="alumno.idUsuario">
-                <p>{{ alumno.nombre }} {{ alumno.apellidos }}</p>
+                <p>{{ alumno }}</p>
               </div>
             </div>
             </div>
@@ -673,7 +671,21 @@ export default {
   background-color: #527c58;
   /* Fondo en active */
   color: #fff;
+}
 
+.container-btn-abrirModalRonda {
+  border-right: #888 1px dotted;
+  padding-right: 10px;
+  margin-right: 2px;
+  padding-bottom: 5px;
+}
+.btn-abrirModalRonda {
+  margin-left: 10px;
+  font-size: 20px;
+  color: #4b57d2;
+}
+.btn-abrirModalRonda:hover {
+  cursor: pointer;
 }
 
 .iconos {
