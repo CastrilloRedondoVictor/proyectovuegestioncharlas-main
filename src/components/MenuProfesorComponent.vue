@@ -76,12 +76,12 @@
 
           <!-- Ítems móviles -->
   <li v-for="(item, index) in dropdownNavItems" :key="'mobile-' + index">
-    <a class="dropdown-item pill-link" :href="item.link">
+    <router-link class="dropdown-item pill-link" :to="item.link">
       <i :class="item.icon"></i> {{ item.name }}
-    </a>
+    </router-link>
   </li>
 
-          <li><a class="dropdown-item pill-link" href="/perfilprofesor"><i class="fas fa-user"></i> Mi Perfil</a></li>
+          <li><router-link class="dropdown-item pill-link" to="/perfilprofesor"><i class="fas fa-user"></i> Mi Perfil</router-link></li>
 
           <li>
             <a class="dropdown-item pill-link" href="#" @click.prevent="logout">

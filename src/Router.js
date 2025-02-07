@@ -150,6 +150,19 @@ const routes = [
             }
         }
     },
+    {
+        path: '/dragandrop/:id',
+        name: 'dragandrop',
+        component: HomeComponent,
+        beforeEnter: (to, from, next) => {
+            const token = Cookies.get('bearer_token');
+            if (token) {
+                next();
+            } else {
+                next('/login');
+            }
+        }
+    },
 
     // Ruta catch-all para manejar Not Found
     {

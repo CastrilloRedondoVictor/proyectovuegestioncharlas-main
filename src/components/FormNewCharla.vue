@@ -95,7 +95,7 @@
                             <h5 class="mt-0">Recursos añadidos:</h5>
                             <ul class="list-group">
                                 <li v-for="(recurso, index) in recursos" :key="index" class="list-group-item">
-                                {{ recurso.nombre }} - <a :href="recurso.url" target="_blank">Ver recurso</a>
+                                {{ recurso.nombre }} - <router-link :to="recurso.url" target="_blank">Ver recurso</router-link>
                                 </li>
                             </ul>
                         </div>

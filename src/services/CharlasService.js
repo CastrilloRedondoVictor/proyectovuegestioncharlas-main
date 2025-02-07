@@ -25,6 +25,23 @@ export default class CharlasService {
         });
     }
 
+    getRonda(idRonda) {
+        return new Promise((resolve, reject) => {
+            const endpoint = `api/Rondas/${idRonda}`;
+            const token = Cookies.get('bearer_token');
+            axios.get(Global.urlBase + endpoint, {
+                headers: {
+                    Authorization: token,
+                },
+            })
+            .then(response => resolve(response.data))
+            .catch(error => {
+                console.error("Error la ronda:", error.response ? error.response.data : error);
+                reject(error);
+            });
+        });
+    }
+
     getVotosRonda(idRonda) {
         return new Promise((resolve, reject) => {
             const endpoint = `api/votos/votosronda/${idRonda}`;

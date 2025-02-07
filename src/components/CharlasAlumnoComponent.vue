@@ -202,13 +202,13 @@
                   >
                     <div class="recurso-header">
                       <h6 class="recurso-title">{{ recurso.nombre }}</h6>
-                      <a
-                        :href="recurso.url"
+                      <router-link
+                        :to="recurso.url"
                         target="_blank"
                         class="recurso-link"
                       >
                         <i class="fa-solid fa-link"></i> Ver Recurso
-                      </a>
+                      </router-link>
                       <!-- Botón de editar -->
                       <button
                         @click="editarRecurso(recurso)"
