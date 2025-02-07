@@ -215,8 +215,7 @@
             <p><strong>Propuestas :</strong> {{charlasPropuestas.length}}</p>
             <div v-if="rolActual != 'ALUMNO'" class="d-flex custom-buttons-container">
               <router-link class="custom-button"
-                :to="`/dragandrop/${rondaActual.idRonda}`"
-                :class="{ 'active': mostrarNoVotados }">
+                :to="`/dragandrop/${rondaActual.idRonda}`">
                 <i class="fa-solid fa-pen-to-square iconos"></i>
                 Gestionar
               </router-link>
@@ -230,10 +229,13 @@
 
             <hr v-if="mostrarNoVotados" />
             <!-- Sección de Descripción -->
-            <div  v-if="mostrarNoVotados" class="custom-background custom-descripcion">
+            <div  v-if="mostrarNoVotados && alumnosSinVotar.length > 0" class="custom-background custom-descripcion">
               <div v-for="alumno in alumnosSinVotar" :key="alumno.idUsuario">
                 <p>{{ alumno }}</p>
               </div>
+            </div>
+            <div  v-if="mostrarNoVotados && alumnosSinVotar.length == 0" class="custom-background custom-descripcion">
+              <p>Todos los alumnos han votado en esta ronda!</p>
             </div>
             </div>
           </div>
